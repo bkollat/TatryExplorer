@@ -1,0 +1,27 @@
+﻿@model TatryExplorer.ViewModels.EditUserViewModel
+@{
+    ViewData["Title"] = "Zmień email";
+}
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<form asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="Email">Zmień email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="UserId" />
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <button type="button" class="btn btn-primary" onclick="history.back()">Anuluj</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

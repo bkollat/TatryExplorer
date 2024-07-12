@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TatryExplorer.ViewModels.AdminViewModel>
+@{
+    ViewData["Title"] = "Zarządzanie użytkownikami";
+}
+<body class="admin background">
+    <h2>@ViewData["Title"]</h2>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Email</td>
+                    <td>@string.Join(", ", user.Roles)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@user.UserId" class="btn btn-primary">Zmień email</a>
+                        <a asp-action="ChangePassword" asp-route-id="@user.UserId" class="btn btn-primary">Zmień hasło</a>
+                        <a asp-action="ManageRoles" asp-route-id="@user.UserId" class="btn btn-primary">Menadżer ról</a>
+                        <a asp-action="Delete" asp-route-id="@user.UserId" class="btn btn-danger">Usuń konto</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

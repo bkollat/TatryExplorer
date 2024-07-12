@@ -1,0 +1,39 @@
+﻿@model TatryExplorer.Models.Trail
+@{
+    ViewData["Title"] = "Edytuj trasę";
+}
+<h2>@ViewData["Title"]</h2>
+
+<h4>Trasa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="Nazwa" class="control-label"></label>
+                <input asp-for="Nazwa" class="form-control" />
+                <span asp-validation-for="Nazwa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Długość" class="control-label"></label>
+                <input asp-for="Długość" class="form-control" />
+                <span asp-validation-for="Długość" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PoziomTrudności" class="control-label"></label>
+                <input asp-for="PoziomTrudności" class="form-control" />
+                <span asp-validation-for="PoziomTrudności" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisSzlaku" class="control-label"></label>
+                <input asp-for="OpisSzlaku" class="form-control" />
+                <span asp-validation-for="OpisSzlaku" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+                <button type="button" class="btn btn-primary" onclick="history.back()">Anuluj</button>
+            </div>
+        </form>
+    </div>
+</div>

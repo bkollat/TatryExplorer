@@ -1,0 +1,21 @@
+﻿@model TatryExplorer.ViewModels.ManageRolesViewModel
+@{
+    ViewData["Title"] = "Zarządzanie rolami";
+}
+<h2>@ViewData["Title"] dla @Model.Email</h2>
+
+<form asp-action="ManageRoles" method="post">
+    <div class="form-group">
+        @for (var i = 0; i < Model.AvailableRoles.Count; i++)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" asp-for="AvailableRoles[i].Selected" />
+                <label class="form-check-label">@Model.AvailableRoles[i].RoleName</label>
+                <input type="hidden" asp-for="AvailableRoles[i].RoleName" />
+            </div>
+        }
+    </div>
+    <input type="hidden" asp-for="UserId" />
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+    <button type="button" class="btn btn-primary" onclick="history.back()">Anuluj</button>
+</form>

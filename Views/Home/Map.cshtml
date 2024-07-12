@@ -1,0 +1,152 @@
+﻿@{
+    ViewData["Title"] = "Mapa Turystyczna";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Wyszukaj szczyt" id="searchInput" aria-label="Wyszukaj szczyt">
+    <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="searchButton">Szukaj</button>
+    </div>
+</div>
+
+<div id="map-container">
+    <div id="map"></div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var map = L.map('map').setView([49.23264, 19.84169], 12);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19
+            }).addTo(map);
+
+            var peaks = [
+                { name: 'Rysy', lat: 49.1795756, lon: 20.088108 },
+                { name: 'Krywań (Kriváň)', lat: 49.1628335, lon: 20.000452 },
+                { name: 'Sławkowski Szczyt (Slavkovský štít)', lat: 49.1660785, lon: 20.1845921 },
+                { name: 'Mała Wysoka (Východná Vysoká)', lat: 49.1752787, lon: 20.1454588 },
+                { name: 'Koprowy Wierch (Kôprovský štít)', lat: 49.1823605, lon: 20.0482069 },
+                { name: 'Mały Krywań (Malý Kriváň)', lat: 49.1591068, lon: 20.0013625 },
+                { name: 'Świnica (Svinica)', lat: 49.2200402, lon: 20.0086422 },
+                { name: 'Kozi Wierch', lat: 49.2183172, lon: 20.0287051 }, 
+                { name: 'Królewski Nos (Kráľovský nos)', lat: 49.1639301, lon: 20.1912323 },
+                { name: 'Kozie Czuby', lat: 49.2188028, lon: 20.0269390 },
+                { name: 'Bystra (Bystrá)', lat: 49.1886176, lon: 19.8425872 },
+                { name: 'Buczynowa Strażnica', lat: 49.2202917, lon: 20.0338276 },
+                { name: 'Zadni Granat', lat: 49.2202917, lon: 20.0325692 },
+                { name: 'Kozie Czuby – wierzchołek zachodni', lat: 49.2190131, lon: 20.0260976 },
+                { name: 'Pośredni Granat', lat: 49.257013, lon: 20.0327347 },
+                { name: 'Jagnięcy Szczyt (Jahňací štít)', lat: 49.2196942, lon: 20.2081025 },
+                { name: 'Mały Kozi Wierch', lat: 49.2189222, lon: 20.0200380 },
+                { name: 'Skrajny Granat', lat: 49.2269445, lon: 20.0332931 },
+                { name: 'Raczkowa Czuba (Jakubina)', lat: 49.1932511, lon: 19.8012755 },
+                { name: 'Baraniec (Baranec)', lat: 49.1735213, lon: 19.7408265 },
+                { name: 'Banówka (Baníkov)', lat: 49.1980554, lon: 19.7103471 },
+                { name: 'Starorobociański Wierch (Klin)', lat: 49.1993710, lon: 19.8199409 },
+                { name: 'Mała Buczynowa Turnia', lat: 49.2274260, lon: 20.0430864 },
+                { name: 'Szpiglasowy Wierch (Hrubý štít)', lat: 49.1972908, lon: 20.0401058 },
+                { name: 'Pachoł (Pachoľa)', lat: 49.2014218, lon: 19.7026587 },
+                { name: 'Hruba Kopa (Hrubá kopa)', lat: 49.2001232, lon: 19.7229810 },
+                { name: 'Kazalnica', lat: 49.2467981, lon: 19.8604040 },
+                { name: 'Kościelec', lat: 49.2251794, lon: 20.0145834 },
+                { name: 'Szczerbawy (Štrbavy)', lat: 49.1715683, lon: 19.7468701 },
+                { name: 'Jałowiecki Przysłop (Jalovecký príslop)', lat: 49.1940143, lon: 19.7104713 },
+                { name: 'Jarząbczy Wierch (Hrubý vrch)', lat: 49.1974727, lon: 19.7951037 },
+                { name: 'Trzy Kopy', lat: 49.2001456, lon: 19.7263757 },
+                { name: 'Rohacz Płaczliwy (Plačlivý Roháč)', lat: 49.1971207, lon: 19.7481230 },
+                { name: 'Kopa nad Krzyżnem', lat: 49.2284705, lon: 20.0464117 },
+                { name: 'Krzesanica (Kresanica)', lat: 49.2316647, lon: 19.9094918 },
+                { name: 'Skrajne Solisko (Predné Solisko)', lat: 49.1496445, lon: 20.0390630 },
+                { name: 'Małołączniak (Malolúčniak)', lat: 49.2358298, lon: 19.9192231 },
+                { name: 'Ciemniak (Temniak)', lat: 49.2310073, lon: 19.9034053 },
+                { name: 'Skrajna Turnia (Krajná kopa)', lat: 49.2231585, lon: 19.9985527 },
+                { name: 'Wyżnia Magura (Vyšná Magura)', lat: 49.2069195, lon: 19.9664080 },
+                { name: 'Rohacz Ostry (Ostrý Roháč)', lat: 49.2002302, lon: 19.7574480 },
+                { name: 'Spalona Kopa (Spálená)', lat: 49.2075781, lon: 19.7070058 },
+                { name: 'Smrek', lat: 49.1825778, lon: 19.7479755 },
+                { name: 'Wołowiec (Volovec)', lat: 49.2075694, lon: 19.7631281 },
+                { name: 'Bula pod Rysami', lat: 49.1819195, lon: 20.0807907 },
+                { name: 'Nogawica (Nohavica)', lat: 49.197139, lon: 19.748139 },
+                { name: 'Pośrednia Magura (Prostredná Magura)', lat: 49.2080694, lon: 19.9594801 },
+                { name: 'Salatyński Wierch (Salatín)', lat: 49.213639, lon: 19.6861678 },
+                { name: 'Mały Salatyn (Malý Salatín)', lat: 49.212111, lon: 19.68825 },
+                { name: 'Klin (Malý Baranec)', lat: 49.1657320, lon: 19.7518547 },
+                { name: 'Rakuska Czuba (Veľká Svišťovka)', lat: 49.2049298, lon: 20.2370981 },
+                { name: 'Twarda Kopa', lat: 49.2346773, lon: 19.9003000 },
+                { name: 'Pośredni Przysłop (Prostredný prislop)', lat: 49.1871797, lon: 19.7023081 },
+                { name: 'Beskid (Beskyd)', lat: 49.2282368, lon: 19.9879231 },
+                { name: 'Smutny Zwornik (Smutný zvornik)', lat: 49.197778, lon: 19.735556 },
+                { name: 'Kopa Kondracka (Kondratova kopa)', lat: 49.2365407, lon: 19.9322676 },
+                { name: 'Kończysty Wierch (Končistá)', lat: 49.2056581, lon: 19.8075854 },
+                { name: 'Kasprowy Wierch (Kasprový vrch)', lat: 49.2318014, lon: 19.9815609 },
+                { name: 'Osterwa (Ostrva)', lat: 49.1499103, lon: 20.0899777 },
+                { name: 'Siwy Zwornik (Sivá veža)', lat: 49.2016538, lon: 19.8295433 },
+                { name: 'Mały Baraniec (Mládky)', lat: 49.158306, lon: 19.756833 },
+                { name: 'Szalona Kazalnica (Hlúpa kazateľnica)', lat: 49.234186, lon: 20.218286 },
+                { name: 'Brestowa (Brestová)', lat: 49.2339, lon: 19.7361 },
+                { name: 'Salatyńska Kopa', lat: 49.2099049, lon: 19.6932891 },
+                { name: 'Niżnia Magura (Nižná Magura)', lat: 49.2079113, lon: 19.9521746 },
+                { name: 'Mała Brestowa (Malá Brestová)', lat: 49.2243851, lon: 19.6800923 },
+                { name: 'Giewont', lat: 49.2509538, lon: 19.9341016 },
+                { name: 'Suchy Wierch Kondracki (Suchý vrch Kondracký)', lat: 49.2333660, lon: 19.9402452 },
+                { name: 'Skrajny Salatyn (Predný Salatín)', lat: 49.2336902, lon: 19.6970140 },
+                { name: 'Rakoń (Rákoň)', lat: 49.2159580, lon: 19.7584624 },
+                { name: 'Świstowa Kopa', lat: 49.2143579, lon: 20.0588475 },
+                { name: 'Zadni Ornak', lat: 49.2130519, lon: 19.8358079 },
+                { name: 'Mały Kościelec', lat: 49.2299344, lon: 20.0114060 },
+                { name: 'Ornak', lat: 49.2190459, lon: 19.8329494 },
+                { name: 'Kotłowa Czubka', lat: 49.2069618, lon: 19.8349199 },
+                { name: 'Suchy Wierch Ornaczański', lat: 49.22225, lon: 19.834306 },
+                { name: 'Siwy Wierch (Sivý vrch)', lat: 49.2111302, lon: 19.6421540 },
+                { name: 'Trzydniowiański Wierch – wierzchołek południowy', lat: 49.2191036, lon: 19.8037262 },
+                { name: 'Ostra (Ostrá)', lat: 49.200556, lon: 19.636167 },
+                { name: 'Trzydniowiański Wierch – wierzchołek północny', lat: 49.2191036, lon: 19.8037262 },
+                { name: 'Zuberski Wierch (Zuberec)', lat: 49.2262973, lon: 19.6665079 },
+                { name: 'Ostredok – wierzchołek północny', lat: 49.1781191, lon: 19.7932674 },
+                { name: 'Grześ (Lúčna)', lat: 49.2595424, lon: 19.8103765 },
+                { name: 'Kruźlik', lat: 49.236472, lon: 19.769444 },
+                { name: 'Siwa Kopa (Sivá kopa)', lat: 49.21325, lon: 19.619056 },
+                { name: 'Róg (Roh)', lat: 49.242778, lon: 19.762611 },
+                { name: 'Babki (Babky)', lat: 49.180139, lon: 19.625889 },
+                { name: 'Klinowate (Klinovaté)', lat: 49.1475, lon: 19.78 },
+                { name: 'Gęsia Szyja', lat: 49.2590286, lon: 20.0765188 },
+                { name: 'Biała Skała (Biela Skala)', lat: 49.2163720, lon: 19.6139701 },
+                { name: 'Sarnia Skała', lat: 49.2648986, lon: 19.9410007 },
+                { name: 'Myślenickie Turnie', lat: 49.2519125, lon: 19.9737831 },
+                { name: 'Biała Czubka', lat: 49.2616531, lon: 19.9635503 },
+                { name: 'Wielki Kopieniec', lat: 49.2716554, lon: 20.0163039 },
+                { name: 'Boczań', lat: 49.2646101, lon: 19.9871382 },
+                { name: 'Nosal', lat: 49.2764311, lon: 19.9894590 },
+                { name: 'Upłaziański Wierszyk', lat: 49.2563337, lon: 19.8784308 }
+            ];
+
+            var markers = [];
+
+            peaks.forEach(function (peak) {
+                var marker = L.marker([peak.lat, peak.lon]).bindPopup(peak.name).addTo(map);
+                markers.push(marker);
+            });
+
+            document.getElementById('searchButton').addEventListener('click', function () {
+                var searchText = document.getElementById('searchInput').value.toLowerCase();
+                var found = peaks.find(peak => peak.name.toLowerCase().includes(searchText));
+
+                if (found) {
+                    map.setView([found.lat, found.lon], 14);
+                    markers.forEach(marker => map.removeLayer(marker));
+                    markers = [];
+                    var marker = L.marker([found.lat, found.lon]).bindPopup(found.name).addTo(map);
+                    markers.push(marker);
+                    marker.openPopup();
+                } else {
+                    alert('Szczyt nie znaleziony');
+                }
+            });
+        });
+    </script>
+}

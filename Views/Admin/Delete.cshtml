@@ -1,0 +1,31 @@
+﻿@model TatryExplorer.ViewModels.DeleteUserViewModel
+@{
+    ViewData["Title"] = "Usuń konto";
+}
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div>
+    <h4>Czy na pewno chcesz usunąć tego użytkownika?</h4>
+    <p>Email: @Model.Email</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="UserId" />
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Usuń</button>
+    <button type="button" class="btn btn-primary" onclick="history.back()">Anuluj</button>
+</form>

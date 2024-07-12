@@ -1,0 +1,145 @@
+﻿.hero-image {
+    background: url('/images/tatry.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.hero-text {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Ciemne tło dla tekstu */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+    .hero-text h1 {
+        color: white;
+        font-size: 35px; /* Rozmiar czcionki */
+    }
+
+    .hero-text p {
+        color: white;
+        font-size: 20px; /* Rozmiar czcionki */
+    }
+
+/* Styl dla kontenera tła */
+.hero-container {
+    background: url('/images/tatry.jpg') no-repeat center center; /* Zastąp ścieżką do twojego obrazu */
+    background-size: cover;
+    height: 150vh; /* Wysokość pełnoekranowa */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centrowanie tekstu w poziomie i pionie */
+    position: relative;
+}
+    body.trails-page {
+    background: url('/images/hiking.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.8);
+    background-blend-mode: overlay;
+}
+
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Stylizacja tekstu */
+.hero-text {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Półprzezroczyste tło dla lepszej widoczności tekstu */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Szerokość bloku tekstu */
+    max-width: 500px; /* Maksymalna szerokość bloku */
+}
+
+.navbar-brand {
+    margin-right: 220px; /* Dostosuj wartość zgodnie z potrzebami */
+}
+
+.navbar-nav.ml-auto {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aby wyrównać elementy do prawej */
+}
+
+.navbar-text {
+    margin-right: 90px; /* Dodaje odstęp po prawej stronie tekstu powitalnego */
+}
+
+.nav-item {
+    margin-left: 180px; /* Dodaje odstęp między elementami nawigacji */
+    /* Dostosowanie stylu nawigacji */
+    .navbar-nav .nav-item .nav-link
+
+{
+    color: whitesmoke;
+    padding-right: 50px;
+}
+
+.navbar-text {
+    color: white;
+    margin-right: 180px;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255,255,255,0.1);
+}
+
+.navbar {
+    flex-wrap: nowrap;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+    /* Podświetlenie po najechaniu myszką */
+    .navbar-nav .nav-item .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+    }
+
+/* Inne poprawki wizualne */
+.navbar {
+    box-shadow: 0 4px 6px -6px #222;
+}
+
+.hero-text h1 {
+    font-size: 48px; /* Zwiększenie rozmiaru czcionki */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Cień dla lepszej widoczności */
+}
+
+.hero-text p {
+    font-size: 24px; /* Zwiększenie rozmiaru czcionki */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Cień dla lepszej widoczności */
+    body, html
+
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+}
+}

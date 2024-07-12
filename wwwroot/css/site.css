@@ -1,0 +1,153 @@
+body.home main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+
+.background {
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0);
+    background-blend-mode: overlay;
+    background-size: cover;
+  
+  
+}
+
+.background2 {
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0);
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+}
+    .trails {
+    background-image: url('/images/hiking.jpg');
+
+}
+
+.trails-all {
+    background-image: url('/images/hiking2.jpg');
+}
+
+.trails-fav {
+    background-image: url('/images/hiking3.jpg');
+}
+
+.admin {
+    background-image: url('/images/admin.jpg');
+}
+
+.home {
+    background-image: url('/images/home.jpg');
+}
+
+.table-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+}
+
+.table th {
+    background-color: rgba(0, 0, 0, 0.5); /* Czarny kolor */
+    color: white;
+}
+
+.table td {
+    background-color: rgba(255, 255, 255, 0.6); /* Przezroczysty bia³y kolor */
+}
+
+.content-overlay {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Stylizacja tekstu */
+.hero-text {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Pó³przezroczyste t³o dla lepszej widocznoœci tekstu */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%; /* Szerokoœæ bloku tekstu */
+    max-width: 500px; /* Maksymalna szerokoœæ bloku */
+}
+
+.hero-text h1 {
+    font-size: 48px; /* Zwiêkszenie rozmiaru czcionki */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Cieñ dla lepszej widocznoœci */
+}
+
+.hero-text p {
+    font-size: 24px; /* Zwiêkszenie rozmiaru czcionki */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* Cieñ dla lepszej widocznoœci */
+}
+
+.navbar-brand {
+    margin-right: 0px; /* Dostosuj wartoœæ zgodnie z potrzebami */
+}
+
+.navbar-nav.ml-auto {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Aby wyrównaæ elementy do prawej */
+}
+
+.navbar-text {
+    margin-right: 90px; /* Dodaje odstêp po prawej stronie tekstu powitalnego */
+    color: white;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: whitesmoke;
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255,255,255,0.1);
+}
+
+.navbar {
+    flex-wrap: nowrap;
+    box-shadow: 0 4px 6px -6px #222;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+    /* Podœwietlenie po najechaniu myszk¹ */
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+#map-container {
+    width: 100%;
+    height: 70vh;
+    margin: auto;
+    border: 2px solid #ccc;
+    position: relative;
+}
+
+#navbarNav {
+    justify-content: space-between;
+    margin-left: 20px;
+}

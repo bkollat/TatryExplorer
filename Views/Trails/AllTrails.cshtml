@@ -1,0 +1,85 @@
+﻿@model IEnumerable<TatryExplorer.Models.TrailViewModel>
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity
+
+@{
+    ViewData["Title"] = "Wszystkie Trasy";
+}
+<body class="trails-all background">
+    <h2>@ViewData["Title"]</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.First().Trail.Nazwa)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Trail.Długość)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Trail.PoziomTrudności)</th>
+                <th>@Html.DisplayNameFor(model => model.First().Trail.OpisSzlaku)</th>
+                <th>Autor</th>
+                <th>Ulubione</th>
+                <th>Akcje</th>
+                <th>Udostępnij</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Trail.Nazwa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Trail.Długość)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Trail.PoziomTrudności)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Trail.OpisSzlaku)</td>
+                    <td>@item.Trail.User?.UserName</td>
+                    <td>
+                        @if (item.IsFavorite)
+                        {
+                            <form asp-action="RemoveFromFavorites" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@item.Trail.Id" />
+                                <button type="submit" class="btn btn-outline-danger">Usuń z ulubionych</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-action="AddToFavorites" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@item.Trail.Id" />
+                                <button type="submit" class="btn btn-outline-success">Dodaj do ulubionych</button>
+                            </form>
+                        }
+                        <span>@item.FavoriteCount</span>
+                    </td>
+                    <td>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Trail.Id" class="btn btn-outline-success">Edytuj</a>
+                            <form asp-action="Delete" method="post" style="display:inline;">
+                                <input type="hidden" name="id" value="@item.Trail.Id" />
+                                <button type="submit" class="btn btn-outline-danger">Usuń</button>
+                            </form>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-info" onclick="shareTrail('@Url.Action("Details", "Trails", new { id = item.Trail.Id })')">Udostępnij</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+<script>
+    function shareTrail(url) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'TatryExplorer - Trasa',
+                url: url
+            }).catch(console.error);
+        } else {
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = window.location.origin + url;
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Link został skopiowany do schowka!');
+        }
+    }
+</script>

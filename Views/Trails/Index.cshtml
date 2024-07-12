@@ -1,0 +1,64 @@
+﻿@model IEnumerable<TatryExplorer.Models.Trail>
+@{
+    ViewData["Title"] = "Moje Trasy";
+}
+
+<body class="trails background">
+    <h2>@ViewData["Title"]</h2>
+    <p>
+        <a asp-action="Create" class="btn btn-outline-primary">Dodaj</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nazwa)</th>
+                <th>@Html.DisplayNameFor(model => model.Długość)</th>
+                <th>@Html.DisplayNameFor(model => model.PoziomTrudności)</th>
+                <th>@Html.DisplayNameFor(model => model.OpisSzlaku)</th>
+                <th>Akcje</th>
+                <th>Udostępnij</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nazwa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Długość)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PoziomTrudności)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OpisSzlaku)</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success">Edytuj</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info">Szczegóły</a>
+                        <form asp-action="Delete" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-outline-danger">Usuń</button>
+                        </form>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-info" onclick="shareTrail('@Url.Action("Details", "Trails", new { id = item.Id })')">Udostępnij</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+<script>
+    function shareTrail(url) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'TatryExplorer - Trasa',
+                url: url
+            }).catch(console.error);
+        } else {
+            const tempInput = document.createElement('input');
+            document.body.appendChild(tempInput);
+            tempInput.value = window.location.origin + url;
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Link został skopiowany do schowka!');
+        }
+    }
+</script>

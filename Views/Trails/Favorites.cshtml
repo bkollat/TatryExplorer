@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TatryExplorer.Models.Trail>
+@{
+    ViewData["Title"] = "Ulubione Trasy";
+}
+<body class="trails-fav background2">
+    <h2>@ViewData["Title"]</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Nazwa)</th>
+                <th>@Html.DisplayNameFor(model => model.Długość)</th>
+                <th>@Html.DisplayNameFor(model => model.PoziomTrudności)</th>
+                <th>@Html.DisplayNameFor(model => model.OpisSzlaku)</th>
+                <th>Akcje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Nazwa)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Długość)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PoziomTrudności)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OpisSzlaku)</td>
+                    <td>
+                        <form asp-action="RemoveFromFavorites" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <button type="submit" class="btn btn-outline-danger">Usuń z ulubionych</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
