@@ -47,6 +47,7 @@
                         <span>@item.FavoriteCount</span>
                     </td>
                     <td>
+                        <a asp-action="Details" asp-route-id="@item.Trail.Id" class="btn btn-outline-info">Szczegóły</a>
                         @if (User.IsInRole("Administrator"))
                         {
                             <a asp-action="Edit" asp-route-id="@item.Trail.Id" class="btn btn-outline-success">Edytuj</a>
